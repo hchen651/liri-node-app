@@ -3,8 +3,8 @@ var fs = require("fs");
 var keys = require("./keys.js")
 var axios = require("axios");
 var moment = require("moment");
-//var Spotify = require("node-spotify-api");
-//var spotify = new Spotify(keys.spotify)
+var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify)
 
 //Converts user input into a string
 var userInput = process.argv[3];
@@ -19,12 +19,12 @@ var command = process.argv[2];
 switch (command) {
     case "concert-this":
         concertThis();
-    // case "spotify-this-song":
-    //     spotifyThisSong();
+    case "spotify-this-song":
+         spotifyThisSong();
     case "movie-this":
         movieThis();
-    // case "do-what-it-says":
-    //     doWhatItSays();
+    case "do-what-it-says":
+         doWhatItSays();
 };
 
 //concert-this
@@ -40,7 +40,9 @@ function concertThis() {
 };
 
 //spotify-this-song
+function spotifyThisSong() {
 
+};
 
 //movie-this
 function movieThis() {
@@ -62,3 +64,6 @@ function movieThis() {
 };
 
 //do-what-it-says
+function doWhatItSays() {
+
+};
