@@ -4,7 +4,7 @@ var keys = require("./keys.js")
 var axios = require("axios");
 var moment = require("moment");
 var Spotify = require("node-spotify-api");
-var spotify = new Spotify(keys.spotify)
+var spotify = new Spotify(keys.spotify);
 
 //Converts user input into a string
 var userInput = process.argv[3];
@@ -20,15 +20,15 @@ switch (command) {
     case "concert-this":
         concertThis();
         break;
-    // case "spotify-this-song":
-    //     spotifyThisSong();
-    //break;
+    case "spotify-this-song":
+        spotifyThisSong();
+        break;
     case "movie-this":
         movieThis();
         break;
-    // case "do-what-it-says":
-    //     doWhatItSays();
-    //break;
+    case "do-what-it-says":
+        doWhatItSays();
+        break;
 };
 
 //concert-this
@@ -45,6 +45,17 @@ function concertThis() {
 
 //spotify-this-song
 function spotifyThisSong() {
+    if (!userInput) {
+        userInput = "The Sign Ace of Base";
+    }
+    spotify.search({type: "track", query: userInput})
+        .then(function (response) {
+            var userSong = response.tracks.items;
+            console.log("Artist(s): " + userSong[0].artists[0].name);
+            console.log("Song Name: " + userSong[0].name);
+            console.log("Preview Link: " + userSong[0].preview_url);
+            console.log("Album: " + userSong[0].album.name);
+        });
 
 };
 
@@ -74,5 +85,19 @@ function movieThis() {
 
 //do-what-it-says
 function doWhatItSays() {
-
+    fs.readFile("random.txt", "utf8", function(error, response) {
+        var randomInput = response.split(",");
+        userInput = randomInput[1];
+        switch (randomInput[0]) {
+            case "concert-this":
+                concertThis();
+                break;
+            case "spotify-this-song":
+                spotifyThisSong();
+                break;
+            case "movie-this":
+                movieThis();
+                break;
+        };
+    })
 };
