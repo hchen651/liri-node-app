@@ -36,9 +36,9 @@ function concertThis() {
     axios.get("https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp")
         .then(function (response) {
             for (var i = 0; i < response.data.length; i++) {
-                console.log("Venue Name: " + response.data[i].venue.name);
-                console.log("Venue Location: " + response.data[i].venue.city + ", " + response.data[i].venue.country);
-                console.log("Date of the Event: " + moment(response.data[i].datetime).format("L"));
+                doubleLog("Venue Name: " + response.data[i].venue.name);
+                doubleLog("Venue Location: " + response.data[i].venue.city + ", " + response.data[i].venue.country);
+                doubleLog("Date of the Event: " + moment(response.data[i].datetime).format("L"));
             }
         });
 };
@@ -51,10 +51,10 @@ function spotifyThisSong() {
     spotify.search({type: "track", query: userInput})
         .then(function (response) {
             var userSong = response.tracks.items;
-            console.log("Artist(s): " + userSong[0].artists[0].name);
-            console.log("Song Name: " + userSong[0].name);
-            console.log("Preview Link: " + userSong[0].preview_url);
-            console.log("Album: " + userSong[0].album.name);
+            doubleLog("Artist(s): " + userSong[0].artists[0].name);
+            doubleLog("Song Name: " + userSong[0].name);
+            doubleLog("Preview Link: " + userSong[0].preview_url);
+            doubleLog("Album: " + userSong[0].album.name);
         });
 
 };
@@ -67,19 +67,19 @@ function movieThis() {
     axios.get("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy")
         .then(function (response) {
 
-            console.log("Title: " + response.data.Title);
-            console.log("Release Year: " + response.data.Year);
-            console.log("IMDB Rating: " + response.data.imdbRating);
+            doubleLog("Title: " + response.data.Title);
+            doubleLog("Release Year: " + response.data.Year);
+            doubleLog("IMDB Rating: " + response.data.imdbRating);
             if (response.data.Ratings[1]){
-                console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+                doubleLog("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
             }
             else {
-                console.log("Rotten Tomatoes Rating: Not Available");
+                doubleLog("Rotten Tomatoes Rating: Not Available");
             }
-            console.log("Country: " + response.data.Country);
-            console.log("Language: " + response.data.Language);
-            console.log("Plot: " + response.data.Plot);
-            console.log("Cast: " + response.data.Actors);
+            doubleLog("Country: " + response.data.Country);
+            doubleLog("Language: " + response.data.Language);
+            doubleLog("Plot: " + response.data.Plot);
+            doubleLog("Cast: " + response.data.Actors);
         });
 };
 
@@ -100,4 +100,9 @@ function doWhatItSays() {
                 break;
         };
     })
+};
+
+function doubleLog (input) {
+    console.log(input);
+    fs.appendFile("log.txt", "\n" + input, function(error){});
 };
