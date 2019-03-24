@@ -3,8 +3,8 @@ var fs = require("fs");
 var keys = require("./keys.js")
 var axios = require("axios");
 var moment = require("moment");
-//var Spotify = require("node-spotify-api");
-//var spotify = new Spotify(keys.spotify)
+var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify)
 
 //Converts user input into a string
 var userInput = process.argv[3];
@@ -44,7 +44,9 @@ function concertThis() {
 };
 
 //spotify-this-song
+function spotifyThisSong() {
 
+};
 
 //movie-this
 function movieThis() {
@@ -71,3 +73,6 @@ function movieThis() {
 };
 
 //do-what-it-says
+function doWhatItSays() {
+
+};
