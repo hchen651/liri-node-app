@@ -19,12 +19,16 @@ var command = process.argv[2];
 switch (command) {
     case "concert-this":
         concertThis();
+        break;
     // case "spotify-this-song":
     //     spotifyThisSong();
+    //break;
     case "movie-this":
         movieThis();
+        break;
     // case "do-what-it-says":
     //     doWhatItSays();
+    //break;
 };
 
 //concert-this
@@ -53,7 +57,12 @@ function movieThis() {
             console.log("Title: " + response.data.Title);
             console.log("Release Year: " + response.data.Year);
             console.log("IMDB Rating: " + response.data.imdbRating);
-            //console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1]);
+            if (response.data.Ratings[1]){
+                console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+            }
+            else {
+                console.log("Rotten Tomatoes Rating: Not Available");
+            }
             console.log("Country: " + response.data.Country);
             console.log("Language: " + response.data.Language);
             console.log("Plot: " + response.data.Plot);
