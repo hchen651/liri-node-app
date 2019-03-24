@@ -16,6 +16,7 @@ if (process.argv.length > 4) {
 
 //CLI Command Processor
 var command = process.argv[2];
+doubleLog(command + " " + userInput);
 switch (command) {
     case "concert-this":
         concertThis();
